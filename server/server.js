@@ -13,13 +13,14 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Successfully connected to MongoDB'))
   .catch(err => console.error('Connection error', err));
 
-// Basic route for the home page
-app.get('/', (req, res) => {
-  res.send('Hello World! This is the home page.');
-});
+// Middleware to parse JSON
+app.use(express.json());
 
-const userRoutes = require('./routes/users'); // Adjust the path as necessary
-app.use('/api', userRoutes);
+// Import routes
+const authRoute = require('./routes/auth');
+
+// Route middlewares
+app.use('/api/user', authRoute);
 
 // Start the server
 app.listen(PORT, () => {
