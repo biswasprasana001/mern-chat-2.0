@@ -18,6 +18,9 @@ app.get('/', (req, res) => {
   res.send('Hello World! This is the home page.');
 });
 
+const userRoutes = require('./routes/users'); // Adjust the path as necessary
+app.use('/api', userRoutes);
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
